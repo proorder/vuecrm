@@ -1,0 +1,10 @@
+const host = "http://localhost:8000";
+export const LOGIN = host + "/api/login";
+export const CLIENTS = host + "/api/clients";
+export const GROUPS = host + "/api/groups";
+export const MANAGERS = host + "/api/managers";
+export const CLIENT = host + "/api/client";
+export const DOCUMENTS = host + "/api/documents";
+export const LOANS = host + "/api/loans";
+export const SEARCH = host + "/api/search";
+export const BANKS = host + "/api/banks";
