@@ -1,12 +1,15 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <img src="../static/CRMLogo.png" />
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <!--<img src="../static/CRMLogo.png" />-->
+      <icon-base width="30px" height="30px">
+        <icon174 />
+      </icon-base>
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <router-link class="nav-link" to="/" exact
-              >Место для логотипа. Главная страница
+            <router-link class="nav-link" to="/" exact>
+              Главная страница
               <span class="sr-only">(current)</span></router-link
             >
           </li>
@@ -58,9 +61,9 @@
 
 <script>
 import { mapState } from "vuex";
-import axios from "axios";
-import { SEARCH } from "../queries";
 import setAuthorizationToken from "../utils/setAuthorizationToken";
+import IconBase from "../components/svg/IconBase";
+import Icon174 from "../components/svg/Icon174";
 
 export default {
   name: "basic",
@@ -75,14 +78,11 @@ export default {
   methods: {
     exit() {
       setAuthorizationToken(false);
-    },
-    search(event) {
-      setTimeout(() => {
-        axios.post(SEARCH, { search: event.target.value }).then(res => {
-          this.clients = res.data;
-        });
-      }, 1500);
     }
+  },
+  components: {
+    IconBase,
+    Icon174
   }
 };
 </script>

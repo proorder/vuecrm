@@ -7,7 +7,11 @@ export default new Vuex.Store({
   state: {
     lastPath: "",
     breadcrumb: [],
-    connectionRefused: false
+    connectionRefused: false,
+    search: ""
+  },
+  getters: {
+    search: state => state.search
   },
   mutations: {
     connectionRefused(state, payload) {
@@ -21,6 +25,9 @@ export default new Vuex.Store({
         if (el.name === payload) return el;
       });
       state.breadcrumb.splice(state.breadcrumb.indexOf(crumb), 1);
+    },
+    enterSearch(state, payload) {
+      state.search = payload.value;
     }
   },
   actions: {}

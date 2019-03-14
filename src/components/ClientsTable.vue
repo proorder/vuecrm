@@ -113,24 +113,26 @@ export default {
       axios
         .post(CLIENTS, {
           query: `
-          query {
-            allClients(state: "raw", page: ${page}) {
-              page
-              pages
-              hasNext
-              hasPrev
-              objects {
-                id
-                fullName
-                actualAddress
-                email
-                phone
-                passport
-                wishfulCredit
-              }
-            }
-          }
-        `
+                query {
+                  allClients(state: "raw", page: ${page}, search: "${
+            this.$store.getters.search
+          }") {
+                    page
+                    pages
+                    hasNext
+                    hasPrev
+                    objects {
+                      id
+                      fullName
+                      actualAddress
+                      email
+                      phone
+                      passport
+                      wishfulCredit
+                    }
+                  }
+                }
+              `
         })
         .then(res => {
           this.pageCount = res.data.data.allClients.pages;
@@ -191,6 +193,16 @@ export default {
   components: {
     SelectBank,
     Pagination
+  },
+  computed: {
+    search() {
+      return this.$store.getters.search;
+    }
+  },
+  watch: {
+    search() {
+      this.getClientsList();
+    }
   }
 };
 </script>

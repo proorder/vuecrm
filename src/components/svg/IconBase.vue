@@ -3,7 +3,7 @@
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     version="1.1"
-    viewBox="0 0 384.97 384.97"
+    viewBox="0 0 300 300"
     xml:space="preserve"
     :width="width"
     :height="height"

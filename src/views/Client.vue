@@ -46,7 +46,6 @@
           >Отказано банком</a
         >
       </li>
-      <!--
       <li class="nav-item ml-auto">
         <input
           class="form-control search-input"
@@ -55,7 +54,6 @@
           v-on:keyup="search"
         />
       </li>
-      -->
     </ul>
     <div v-if="state === 'raw'">
       <clients-table></clients-table>
@@ -76,6 +74,7 @@
 // @ is an alias to /src
 import ClientsTable from "@/components/ClientsTable.vue";
 import SendingClientsTable from "@/components/SendingClientsTable.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "client",
@@ -86,10 +85,23 @@ export default {
         query: { ...this.$route.query, ...{ state: type, page: 1 } }
       });
       this.state = type;
+    },
+    search(event) {
+      if (!this.search_bool) {
+        this.search_bool = true;
+        setTimeout(() => {
+          this.search_bool = false;
+          this.$store.commit("enterSearch", { value: event.target.value });
+          // axios.post(SEARCH, { search: event.target.value }).then(res => {
+          //   this.clients = res.data;
+          // });
+        }, 1500);
+      }
     }
   },
   data: () => ({
-    state: "raw"
+    state: "raw",
+    search_bool: false
   }),
   metaInfo: {
     title: "Клиенты"
@@ -100,6 +112,9 @@ export default {
   components: {
     ClientsTable,
     SendingClientsTable
+  },
+  computed: {
+    ...mapGetters({ search_value: "search" })
   }
 };
 </script>

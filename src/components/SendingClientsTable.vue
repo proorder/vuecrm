@@ -96,7 +96,9 @@ export default {
         .post(CLIENTS, {
           query: `
           query {
-            allClients(state: "sending", page: ${page}) {
+            allClients(state: "sending", page: ${page}, search: "${
+            this.search
+          }") {
               page
               pages
               hasNext
@@ -184,6 +186,11 @@ export default {
         inner += "<div>" + el.filename + "</div>";
       });
       return inner;
+    }
+  },
+  computed: {
+    search() {
+      return this.$store.getters.search;
     }
   },
   props: ["state"],
