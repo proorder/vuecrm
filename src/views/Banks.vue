@@ -62,9 +62,8 @@ export default {
   methods: {
     getBanksList() {
       axios
-        .get(CLIENTS, {
-          params: {
-            query: `
+        .post(CLIENTS, {
+          query: `
               query {
                 allBanks {
                   id
@@ -74,7 +73,6 @@ export default {
                 }
               }
             `
-          }
         })
         .then(res => {
           this.banks = res.data.data.allBanks;

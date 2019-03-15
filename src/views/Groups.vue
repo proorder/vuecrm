@@ -73,9 +73,8 @@ export default {
   methods: {
     getGroupsList() {
       axios
-        .get(CLIENTS, {
-          params: {
-            query: `
+        .post(CLIENTS, {
+          query: `
               query {
                 allGroups {
                   id
@@ -88,7 +87,6 @@ export default {
                 }
               }
             `
-          }
         })
         .then(res => {
           this.groups = res.data.data.allGroups;

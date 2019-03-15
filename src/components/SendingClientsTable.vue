@@ -93,13 +93,12 @@ export default {
       this.loaded = false;
       const page = this.$route.query.page ? this.$route.query.page : 1;
       axios
-        .get(CLIENTS, {
-          params: {
-            query: `
+        .post(CLIENTS, {
+          query: `
               query {
                 allClients(state: "sending", page: ${page}, search: "${
-              this.search
-            }") {
+            this.search
+          }") {
                   page
                   pages
                   hasNext
@@ -117,7 +116,6 @@ export default {
                 }
               }
             `
-          }
         })
         .then(res => {
           this.pageCount = res.data.data.allClients.pages;

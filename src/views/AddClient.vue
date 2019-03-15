@@ -702,9 +702,8 @@ export default {
   methods: {
     getClient() {
       axios
-        .get(CLIENTS, {
-          params: {
-            query: `
+        .post(CLIENTS, {
+          query: `
               query {
                 client(id: ${this.$route.params.id}) {
                   fullName
@@ -740,7 +739,6 @@ export default {
                 }
               }
             `
-          }
         })
         .then(res => {
           this.dataFetch(res.data.data.client);
