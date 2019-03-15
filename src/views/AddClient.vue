@@ -702,43 +702,45 @@ export default {
   methods: {
     getClient() {
       axios
-        .post(CLIENTS, {
-          query: `
-          query {
-            client(id: ${this.$route.params.id}) {
-              fullName
-              actualAddress
-              registrationAddress
-              email
-              phone
-              passport
-              wishfulCredit
-              birthplace
-              previousName
-              snils
-              driversLicense
-              additionalContacts
-              maritalStatus
-              children
-              education
-              placeOfWork
-              innOfWork
-              actualAddressOfWork
-              phoneOfWork
-              postOnWork
-              workExperience
-              commonExperience
-              wages
-              partTimeJob
-              loans {
-                bank
-                date
-                term
-                payment
+        .get(CLIENTS, {
+          params: {
+            query: `
+              query {
+                client(id: ${this.$route.params.id}) {
+                  fullName
+                  actualAddress
+                  registrationAddress
+                  email
+                  phone
+                  passport
+                  wishfulCredit
+                  birthplace
+                  previousName
+                  snils
+                  driversLicense
+                  additionalContacts
+                  maritalStatus
+                  children
+                  education
+                  placeOfWork
+                  innOfWork
+                  actualAddressOfWork
+                  phoneOfWork
+                  postOnWork
+                  workExperience
+                  commonExperience
+                  wages
+                  partTimeJob
+                  loans {
+                    bank
+                    date
+                    term
+                    payment
+                  }
+                }
               }
-            }
+            `
           }
-        `
         })
         .then(res => {
           this.dataFetch(res.data.data.client);

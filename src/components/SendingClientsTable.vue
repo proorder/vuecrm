@@ -93,29 +93,31 @@ export default {
       this.loaded = false;
       const page = this.$route.query.page ? this.$route.query.page : 1;
       axios
-        .post(CLIENTS, {
-          query: `
-          query {
-            allClients(state: "sending", page: ${page}, search: "${
-            this.search
-          }") {
-              page
-              pages
-              hasNext
-              hasPrev
-              objects {
-                id
-                fullName
-                actualAddress
-                sendingTo
-                documents {
-                  file
-                  filename
+        .get(CLIENTS, {
+          params: {
+            query: `
+              query {
+                allClients(state: "sending", page: ${page}, search: "${
+              this.search
+            }") {
+                  page
+                  pages
+                  hasNext
+                  hasPrev
+                  objects {
+                    id
+                    fullName
+                    actualAddress
+                    sendingTo
+                    documents {
+                      file
+                      filename
+                    }
+                  }
                 }
               }
-            }
+            `
           }
-        `
         })
         .then(res => {
           this.pageCount = res.data.data.allClients.pages;

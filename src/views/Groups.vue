@@ -73,20 +73,22 @@ export default {
   methods: {
     getGroupsList() {
       axios
-        .post(CLIENTS, {
-          query: `
-          query {
-            allGroups {
-              id
-              group
-              children {
-                id
-                username
-                fullName
+        .get(CLIENTS, {
+          params: {
+            query: `
+              query {
+                allGroups {
+                  id
+                  group
+                  children {
+                    id
+                    username
+                    fullName
+                  }
+                }
               }
-            }
+            `
           }
-        `
         })
         .then(res => {
           this.groups = res.data.data.allGroups;

@@ -52,17 +52,19 @@ export default {
     getBanksList() {
       this.loaded = false;
       axios
-        .post(CLIENTS, {
-          query: `
-            query {
-              allBanks {
-                id
-                fullName
-                conditions
-                email
-              }
-            }
-          `
+        .get(CLIENTS, {
+          params: {
+            query: `
+                query {
+                  allBanks {
+                    id
+                    fullName
+                    conditions
+                    email
+                  }
+                }
+              `
+          }
         })
         .then(res => {
           this.banks = res.data.data.allBanks;

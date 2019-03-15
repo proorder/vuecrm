@@ -111,28 +111,30 @@ export default {
       this.loaded = false;
       const page = this.$route.query.page ? this.$route.query.page : 1;
       axios
-        .post(CLIENTS, {
-          query: `
-                query {
-                  allClients(state: "raw", page: ${page}, search: "${
-            this.$store.getters.search
-          }") {
-                    page
-                    pages
-                    hasNext
-                    hasPrev
-                    objects {
-                      id
-                      fullName
-                      actualAddress
-                      email
-                      phone
-                      passport
-                      wishfulCredit
+        .get(CLIENTS, {
+          params: {
+            query: `
+                    query {
+                      allClients(state: "raw", page: ${page}, search: "${
+              this.$store.getters.search
+            }") {
+                        page
+                        pages
+                        hasNext
+                        hasPrev
+                        objects {
+                          id
+                          fullName
+                          actualAddress
+                          email
+                          phone
+                          passport
+                          wishfulCredit
+                        }
+                      }
                     }
-                  }
-                }
-              `
+                  `
+          }
         })
         .then(res => {
           this.pageCount = res.data.data.allClients.pages;
